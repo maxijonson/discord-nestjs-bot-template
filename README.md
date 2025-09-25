@@ -1,6 +1,16 @@
-# Discord Bot NestJS Template
+<p align="center">
+    <h1 align="center">Discord NestJS Bot Template</h1>
+</p>
 
-A Discord bot template powered by [NestJS](https://nestjs.com/) using [Necord](https://necord.org/) and [Discord.js](https://discord.js.org/).
+<p align="center">
+A Discord bot template powered by <a href="https://nestjs.com/" target="_blank">NestJS</a> using <a href="https://necord.org/" target="_blank">Necord</a> and <a href="https://discord.js.org/" target="_blank">Discord.js</a>.
+</p>
+
+<p align="center">
+    <a href="https://railway.com/deploy/6VUfgz?referralCode=maxijonson" target="_blank">
+        <img src="https://railway.com/button.svg" alt="Deploy on Railway" />
+    </a>
+</p>
 
 ## Motivation
 
@@ -14,6 +24,8 @@ This template aims to provide a concise yet comprehensive starting point for bui
 
 **✅ Zod**: Strongly typed schemas using [Zod 4](https://zod.dev/). This template is allergic to `any`!
 
-## Deploy
+## One-Click Deployment
 
-This template was specifically made for deployment on [Railway](https://railway.app/). To deploy this template on Railway, simply click the button below:
+Get a **$20 Railway credit** by deploying your Discord bot with this button:
+
+[![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/deploy/6VUfgz?referralCode=maxijonson)
