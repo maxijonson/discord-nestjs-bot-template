@@ -64,5 +64,11 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
+  },
+  "volta": {
+    "node": "22.20.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }

@@ -12,20 +12,35 @@ A Discord bot template powered by <a href="https://nestjs.com/" target="_blank">
     </a>
 </p>
 
+## Why NestJS instead of plain Discord.js?
+
+Most Discord bot templates out there use Discord.js on its own, inside a plain Node app. This is fine for small bots, but as your bot grows, you might find yourself struggling to keep your code organized and maintainable. NestJS is a progressive Node.js framework that helps you build efficient, reliable, and scalable server-side applications. It provides a modular architecture, dependency injection, and a powerful CLI, making it easier to manage complex applications. Necord is a framework built on top of Discord.js that leverages the power of NestJS to create Discord bots with a clean and structured approach.
+
 ## Motivation
 
-Most Discord bot templates out there use Discord.js in a raw form, inside a plain Node app. This is fine for small bots, but as your bot grows, you might find yourself struggling to keep your code organized and maintainable. NestJS is a progressive Node.js framework that helps you build efficient, reliable, and scalable server-side applications. It provides a modular architecture, dependency injection, and a powerful CLI, making it easier to manage complex applications. Necord is a framework built on top of Discord.js that leverages the power of NestJS to create Discord bots with a clean and structured approach.
+With this template, you can quickly set up a Discord bot using NestJS and have a solid foundation to build upon. Additionally, having a NestJS-based bot can be beneficial if you plan to integrate your bot with a web application or API, as you can share code and services between the two. This means that using this template, you can eventually expand your bot's functionality to include a REST API, letting your interact with your bot outside of Discord!
 
-With this template, you can quickly set up a Discord bot using NestJS and have a solid foundation to build upon. Additionally, having a NestJS-based bot can be beneficial if you plan to integrate your bot with a web application or API, as you can share code and services between the two. This means that using this template, you can eventually expand your bot's functionality to include a REST API that can interact with your bot. This is particularly useful for creating web dashboards, managing bot settings, or providing additional services to your users.
+## Who is this template for?
 
-This template aims to provide a concise yet comprehensive starting point for building a Discord bot. The goal of this template is to touch a little bit of every capability of a Discord bot, without going too deep into any specific feature. This way, you get a thrashable example of how to use various features of a Discord bot, and you can then expand upon them as needed. In other words, this template is not meant to be a fully-featured bot, but rather a starting point for building your own bot.
+This template aims to provide a concise yet comprehensive starting point for building a Discord bot. However, in order to be flexible to a wide range of use cases, it is **not** a fully featured bot with a lot of built-in commands. That is up to you to implement with your own use case in mind. This template will provide you with short examples of everything that is possible, but you'll most likely end up removing a lot of the example code to make it your own.
+
+This template is for you if:
+- You have some experience with TypeScript (or just JavaScript) and Node.js.
+- You want an opinionated file structure and architecture to build your bot on, instead of getting lost in a sea of files and folders that don't make sense.
+- You want to build a bot that can eventually be expanded to include a REST API and be interacted with outside of Discord. See the [REST_API](guides/2-REST_API.md) guide for more information.
+- You want a bot that scales well as your bot's complexity grows.
+- (Optional) You have some experience with NestJS. If you don't, that's okay! There are a lot of examples you can rely on to just copy/paste the same patterns over. NestJS makes patterns emerge naturally, so it's hard to sway too far from the recommended way of doing things.
 
 ## Template Features
 
 **✅ Zod**: Strongly typed schemas using [Zod 4](https://zod.dev/). This template is allergic to `any`!
 
-## One-Click Deployment
+## Setup
 
-Get a **$20 Railway credit** by deploying your Discord bot with this button:
+See the [Setup Guide](guides/1-SETUP.md) for instructions on how to get your bot up and running in no time.
+
+## One-Click Deploy
+
+Get a **$20 Railway credit** by deploying your Discord bot with this button (that's 4 months of free hosting!). This is also a free way of supporting this template's development!
 
 [![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/deploy/6VUfgz?referralCode=maxijonson)
