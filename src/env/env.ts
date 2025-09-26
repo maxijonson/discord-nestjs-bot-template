@@ -8,17 +8,8 @@ export const Env = z.object({
     .optional()
     .default(process.env.NODE_ENV === "development" ? "development" : "production"),
 
-  /** Port the server should listen on */
-  PORT: nonEmptyString.default("3001").transform((value) => parseInt(value, 10)),
-
-  /** Discord client ID: https://discord.com/developers/applications */
-  DISCORD_CLIENT_ID: nonEmptyString,
-
-  /** Discord client secret */
-  DISCORD_CLIENT_SECRET: nonEmptyString,
-
   /** Discord bot token */
-  DISCORD_BOT_TOKEN: nonEmptyString.optional(),
+  DISCORD_BOT_TOKEN: nonEmptyString,
 
   /** Railway provided variables */
   RAILWAY_PUBLIC_DOMAIN: nonEmptyString.optional(),
