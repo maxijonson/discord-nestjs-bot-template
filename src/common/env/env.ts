@@ -1,4 +1,4 @@
-import { nonEmptyString } from "src/utils/schemas/non-empty-string.schema";
+import { nonEmptyString } from "src/common/utils/schemas/non-empty-string.schema";
 import { z } from "zod";
 
 export const Env = z.object({
