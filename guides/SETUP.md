@@ -32,9 +32,9 @@ This guide will walk you through the steps to get your Discord bot up and runnin
 >
 > - A [GitHub](https://github.com/) account to host your code repository. This will be used to sign in to Railway and will also let Railway watch for changes to your code and automatically redeploy your bot whenever you push new code.
 
-1. Deploy the bot on [Railway](https://railway.com/deploy/6VUfgz?referralCode=maxijonson) using the button below and pressing "Deploy Now". Using this button will grant you a **$20 Railway credit** (that's 4 months of free hosting!).
+1. Deploy the bot on [Railway](https://railway.com/deploy/discord-nestjs-bot?referralCode=maxijonson) using the button below and pressing "Deploy Now". Using this button will grant you a **$20 Railway credit** (that's 4 months of free hosting!).
 
-   [![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/deploy/6VUfgz?referralCode=maxijonson)
+   [![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/deploy/discord-nestjs-bot?referralCode=maxijonson)
 
 2. When prompted, add the token you generated in step `2.2`.
 3. Once your first deployment is complete, you should see your bot come online in the Discord server you invited it to! Try sending the `/ping` slash command to see if it responds with "Pong!".

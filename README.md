@@ -7,7 +7,7 @@ A Discord bot template powered by <a href="https://nestjs.com/" target="_blank">
 </p>
 
 <p align="center">
-    <a href="https://railway.com/deploy/6VUfgz?referralCode=maxijonson" target="_blank">
+    <a href="https://railway.com/deploy/discord-nestjs-bot?referralCode=maxijonson" target="_blank">
         <img src="https://railway.com/button.svg" alt="Deploy on Railway" />
     </a>
 </p>
@@ -55,4 +55,4 @@ This template comes with guides to help you get started and extend your bot with
 
 Get a **$20 Railway credit** by deploying your Discord bot with this button (that's 4 months of free hosting!). This is also an effortless way of showing your support for this template, as I get a small commission! Thank you for your support ♥️
 
-[![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/deploy/6VUfgz?referralCode=maxijonson)
+[![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/deploy/discord-nestjs-bot?referralCode=maxijonson)
