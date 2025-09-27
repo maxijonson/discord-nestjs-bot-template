@@ -21,6 +21,7 @@ This guide will walk you through the steps to get your Discord bot up and runnin
 3. Under "Permissions", select the permissions your bot will need. 
    > Note that this template, in its current state, requires the following permissions for the example features to work properly:
    > - Send Messages
+   > - Manage Messages
    > - Use Slash Commands
 4. Click on "Save Changes".
 5. Copy the "Install Link" and open it in a new browser tab. Select the server you want to invite your bot to and click "Continue", then "Authorize".

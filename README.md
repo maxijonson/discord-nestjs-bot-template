@@ -12,9 +12,9 @@ A Discord bot template powered by <a href="https://nestjs.com/" target="_blank">
     </a>
 </p>
 
-## ⚠️ IN ACTIVE DEVELOPMENT ⚠️
+## ⚠️ Usable, but still a work in progress! ⚠️
 
-This template is still very much in development. You're welcome to use it as-is, but be aware that this is not even close to being an alpha! There are still a lot of features, examples and documentation missing.
+This template is still very much in development. You're welcome to use it as-is, but there are still a lot of features, examples and documentation missing that I plan to add soon.
 
 That being said, the current state of the template is perfectly usable, it's just not very useful at the moment. If you use it now, you'll still have a working bot, but you won't have many examples to build upon yet. Consider starring the repo to show your interest and watch for updates!
 
