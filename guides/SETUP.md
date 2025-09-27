@@ -17,7 +17,7 @@ This guide will walk you through the steps to get your Discord bot up and runnin
 ## 3. Invite your Bot to a Server
 
 1. On the left sidebar of the Discord Developer Portal, click on "Installation". Alternatively, you can navigate to `https://discord.com/developers/applications/<YOUR_APPLICATION_ID>/installation`.
-2. Scroll down to "Default Install Settings" and under "Guild Install", make sure the scropes are set to `application.commands` and `bot`.
+2. Scroll down to "Default Install Settings" and under "Guild Install", make sure the scopes are set to `application.commands` and `bot`.
 3. Under "Permissions", select the permissions your bot will need. 
    > Note that this template, in its current state, requires the following permissions for the example features to work properly:
    > - Send Messages

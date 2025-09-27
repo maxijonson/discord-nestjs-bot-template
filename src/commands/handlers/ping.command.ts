@@ -7,7 +7,7 @@ export class PingCommand {
     name: "ping",
     description: "Ping-Pong Command",
   })
-  public async onPing(@Context() [interaction]: SlashCommandContext) {
+  public async handlePing(@Context() [interaction]: SlashCommandContext) {
     return interaction.reply({ content: "Pong!" });
   }
 }

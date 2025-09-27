@@ -20,3 +20,4 @@ After you've deployed your bot with Railway as suggested in the main README, you
 2. In the "Architecture" tab, click on your bot's service, then click on the "Settings" tab.
 3. Under the "Networking" section, choose either "Generate Domain" to get a free Railway subdomain, or "Custom Domain" if you have your own domain name.
 4. When prompted for the port, you may choose whatever port you want. If you're not sure, just use `3000`, which is a common default port for NestJS applications.
+5. Save your changes. Once the changes are saved, Railway will automatically redeploy your bot with the new settings. You can visit the `/health` endpoint at your new domain to verify that it's working.

@@ -22,7 +22,7 @@ With this template, you can quickly set up a Discord bot using NestJS and have a
 
 ## Who is this template for?
 
-This template aims to provide a concise yet comprehensive starting point for building a Discord bot. However, in order to be flexible to a wide range of use cases, it is **not** a fully featured bot with a lot of built-in commands. In other words, while you can simply use this template as-is and deploy it succesfully, it won't be very useful on in it's current state. It is up to you to implement your own commands and logic, built around your use-case. This template will provide you with short examples of everything that is possible, but you'll most likely end up removing a lot of the example code to make it your own.
+This template aims to provide a concise yet comprehensive starting point for building a Discord bot. However, in order to be flexible to a wide range of use cases, it is **not** a fully featured bot with a lot of built-in commands. In other words, while you can simply use this template as-is and deploy it successfully, it won't be very useful on in its current state. It is up to you to implement your own commands and logic, built around your use-case. This template will provide you with short examples of everything that is possible, but you'll most likely end up removing a lot of the example code to make it your own.
 
 This template is for you if:
 - You have some experience with TypeScript (or just JavaScript) and Node.js.
@@ -43,6 +43,7 @@ This template comes with guides to help you get started and extend your bot with
 1. [Setup](guides/SETUP.md): This guide will walk you through the steps of getting your bot online, starting from nothing and ending with a production-ready bot hosted on Railway.
 2. [Project Structure](guides/PROJECT_STRUCTURE.md): Overview of the project's folder structure and organization.
 3. [REST API](guides/REST_API.md): Instructions on how to set up a REST API alongside your bot, allowing you to interact with it outside of Discord.
+4. [Scripts](guides/SCRIPTS.md): Explanation of the NPM scripts included in this template to help you automate tasks like creating new commands.
 
 ## One-Click Deploy
 
