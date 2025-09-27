@@ -4,6 +4,8 @@ This guide explains the project structure of the template and the reasoning behi
 
 ## File Structure
 
+> While you can change the structure to whatever suits your needs, note that keeping the current structure will allow you to use certain convenience [scripts](./SCRIPTS.md), like the `create:command` script, which relies on this structure to work properly.
+
 The bot is organized into the following main folders (inside the `src` folder).
 
 - `commands`: Contains all slash commands of the bot. (`@SlashCommand`)
@@ -27,11 +29,11 @@ import { Injectable } from "@nestjs/common";
 
 @Injectable()
 export class SomeService {
-    constructor(private readonly envService: EnvService) {}
+  constructor(private readonly envService: EnvService) {}
 
-    someMethod() {
-        const value = this.envService.get("SOME_ENV_VARIABLE");
-    }
+  someMethod() {
+    const value = this.envService.get("SOME_ENV_VARIABLE");
+  }
 }
 ```
 
