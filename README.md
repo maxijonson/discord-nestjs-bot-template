@@ -12,6 +12,12 @@ A Discord bot template powered by <a href="https://nestjs.com/" target="_blank">
     </a>
 </p>
 
+## ⚠️ IN ACTIVE DEVELOPMENT ⚠️
+
+This template is still very much in development. You're welcome to use it as-is, but be aware that this is not even close to being an alpha! There are still a lot of features, examples and documentation missing.
+
+That being said, the current state of the template is perfectly usable, it's just not very useful at the moment. If you use it now, you'll still have a working bot, but you won't have many examples to build upon yet. Consider starring the repo to show your interest and watch for updates!
+
 ## Why NestJS instead of plain Discord.js?
 
 Most Discord bot templates out there use Discord.js on its own, inside a plain Node app. This is fine for small bots, but as your bot grows, you might find yourself struggling to keep your code organized and maintainable. NestJS is a progressive Node.js framework that helps you build efficient, reliable, and scalable server-side applications. It provides a modular architecture, dependency injection, and a powerful CLI, making it easier to manage complex applications. Necord is a framework built on top of Discord.js that leverages the power of NestJS to create Discord bots with a clean and structured approach.
