@@ -74,7 +74,7 @@ import {
 
   cmdSource.addImportDeclaration({
     moduleSpecifier: "necord",
-    namedImports: ["SlashCommand", { isTypeOnly: true, name: "SlashCommandContext" }],
+    namedImports: ["SlashCommand", "Context", { isTypeOnly: true, name: "SlashCommandContext" }],
   });
 
   cmdSource.addClass({
