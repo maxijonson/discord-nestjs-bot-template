@@ -35,7 +35,7 @@ export const formatWithPrettier = async (files: string[]) => {
     const source = await fs.promises.readFile(file, "utf8");
     const formatted = await prettier.format(source, {
       ...config,
-      filepath: file, // lets Prettier infer parser from extension
+      filepath: file,
     });
     await fs.promises.writeFile(file, formatted, "utf8");
   }
