@@ -74,12 +74,7 @@ import {
 
   cmdSource.addImportDeclaration({
     moduleSpecifier: "necord",
-    namedImports: ["SlashCommand"],
-  });
-
-  cmdSource.addImportDeclaration({
-    moduleSpecifier: "discord.js",
-    namedImports: ["CommandInteraction"],
+    namedImports: ["SlashCommand", { isTypeOnly: true, name: "SlashCommandContext" }],
   });
 
   cmdSource.addClass({
@@ -103,8 +98,8 @@ import {
         ],
         parameters: [
           {
-            name: "interaction",
-            type: "CommandInteraction",
+            name: "@Context() [interaction]",
+            type: "SlashCommandContext",
           },
         ],
         statements: [`await interaction.reply("Pong from ${nameKebab}!");`],

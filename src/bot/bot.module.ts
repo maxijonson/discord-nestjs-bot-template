@@ -1,5 +1,4 @@
 import { Module } from "@nestjs/common";
-import { IntentsBitField } from "discord.js";
 import { NecordModule } from "necord";
 import { EnvService } from "src/env/env.service";
 
@@ -13,7 +12,7 @@ import { EnvService } from "src/env/env.service";
           envService.get("NEST_ENV") !== "production" && envService.get("DEVELOPMENT_GUILD_ID")
             ? [envService.get("DEVELOPMENT_GUILD_ID")!]
             : undefined,
-        intents: [IntentsBitField.Flags.Guilds],
+        intents: [],
       }),
     }),
   ],
