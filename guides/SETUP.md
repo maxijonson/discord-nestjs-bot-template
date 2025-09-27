@@ -16,17 +16,15 @@ This guide will walk you through the steps to get your Discord bot up and runnin
 
 ## 3. Invite your Bot to a Server
 
-1. On the left sidebar of the Discord Developer Portal, click on "OAuth2". Alternatively, you can navigate to `https://discord.com/developers/applications/<YOUR_APPLICATION_ID>/oauth2`.
-2. Scroll down to the "OAuth2 URL Generator" section.
-3. Under "SCOPES", select the following scopes:
-   1. `bot`
-   2. `applications.commands`
-4. Under "BOT PERMISSIONS", select the permissions your bot will need. While using `Administrator` may be tempting, it's best to only select the permissions your bot actually needs (even during development!). You can change the bot's permissions in the Discord server you invite it to without needing to re-invite them. However, if you plan on making your bot public, make sure that you get these permissions right when you publish your bot's invite link. In it's initial state, this template requires the following permissions:
-   - `Send Messages`
-   - `Embed Links`
-5. Copy the generated URL at the bottom of the page and open it in a new tab.
-6. Select the server you want to invite your bot to and click "Continue", then "Authorize".
-7. You should now have the offline bot in your server's member list.
+1. On the left sidebar of the Discord Developer Portal, click on "Installation". Alternatively, you can navigate to `https://discord.com/developers/applications/<YOUR_APPLICATION_ID>/installation`.
+2. Scroll down to "Default Install Settings" and under "Guild Install", make sure the scropes are set to `application.commands` and `bot`.
+3. Under "Permissions", select the permissions your bot will need. 
+   > Note that this template, in its current state, requires the following permissions for the example features to work properly:
+   > - Send Messages
+   > - Use Slash Commands
+4. Click on "Save Changes".
+5. Copy the "Install Link" and open it in a new browser tab. Select the server you want to invite your bot to and click "Continue", then "Authorize".
+6. You should now have the offline bot in your server's member list.
 
 ## 4. Get your Bot online
 
@@ -34,7 +32,7 @@ This guide will walk you through the steps to get your Discord bot up and runnin
 >
 > - A [GitHub](https://github.com/) account to host your code repository. This will be used to sign in to Railway and will also let Railway watch for changes to your code and automatically redeploy your bot whenever you push new code.
 
-1. Deploy the bot on [Railway](https://railway.com/deploy/6VUfgz?referralCode=maxijonson) using the button below and pressing "Deploy Now".
+1. Deploy the bot on [Railway](https://railway.com/deploy/6VUfgz?referralCode=maxijonson) using the button below and pressing "Deploy Now". Using this button will grant you a **$20 Railway credit** (that's 4 months of free hosting!).
 
    [![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/deploy/6VUfgz?referralCode=maxijonson)
 
@@ -69,12 +67,12 @@ Now that your bot is online and production ready, you can setup your local devel
    npm install
    ```
 7. Create a new Discord Application from the Discord Developer Portal, following steps `1` to `3` from this guide. This will be your development bot, which you can invite to a separate Discord server for testing purposes. This way, you won't accidentally mess up your production bot while developing new features. Also, Discord doesn't really like having two bots running at the same time with the same token (remember you should have the one in Railway running at this point!).
-8. Copy the `.env.example` file to a new `.env` file in the root of the project and fill in the `DISCORD_BOT_TOKEN` variable with the token of your **development bot**.
+8. Copy the [`.env.example`](../.env.example) file to a new `.env` file in the root of the project and fill in the `DISCORD_BOT_TOKEN` variable with the token of your **development bot**.
 9. Start the bot in development mode:
 
-    ```bash
-    npm run dev
-    ```
+   ```bash
+   npm run dev
+   ```
 
 10. Change the `/ping` command to `/hello` and change the response to `"World!"` in `src/commands/ping/ping.command.ts`:
 
@@ -93,3 +91,15 @@ Now that your bot is online and production ready, you can setup your local devel
     git push origin main
     ```
 13. Go back to your Railway project dashboard and wait for the new deployment to complete. Once it's done, try sending the `/hello` command again in your Discord server to see if it still responds with "World!".
+
+## 6. Next Steps
+
+Now that you have your bot up and running, you can start customizing it to your needs. Here are some suggestions on what to do next.
+
+### 6.1 Intents
+
+Intents tell Discord what events your bot intends on handling, so that your bot isn't overwhelmed with events it doesn't care about. For example, having the `GUILD_MEMBERS` intent enabled
+
+Set the correct intents for your bot in the [`src/bot/bot.module.ts`](../src/bot/bot.module.ts) file. By default, only those required for the example features to work properly were set. Your bot might need more or less intents depending on what you want to do. Note that some intents are considered "Privileged Intents" by Discord and require you to enable them in the Discord Developer Portal for your bot. Privileged intents require your bot to go through Discord's verification process if your bot is in more than 100 servers. If it's in less than 100 servers, you can enable them without verification.
+
+You can find a list of all the available intents in the [Discord.js documentation](https://discord-api-types.dev/api/discord-api-types-v10/enum/GatewayIntentBits) and on [Discord's official documentation](https://discord.com/developers/docs/events/gateway#list-of-intents).

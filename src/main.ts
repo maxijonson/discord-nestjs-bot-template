@@ -1,12 +1,14 @@
 import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
 import { Logger } from "@nestjs/common";
+import { EnvService } from "./env/env.service";
 
 async function bootstrap() {
-  const _app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule);
 
-  // Uncomment this line if you want your bot to also expose a REST API
-  // await _app.listen(process.env.PORT ?? 3000);
+  const env = app.get(EnvService);
+
+  await app.listen(env.get("PORT"));
 }
 bootstrap().catch((err) => {
   console.error("💥 Failed to bootstrap the application:", err);

@@ -8,8 +8,14 @@ export const Env = z.object({
     .optional()
     .default(process.env.NODE_ENV === "development" ? "development" : "production"),
 
+  /** The port the application will run on */
+  PORT: z.coerce.number().int().min(1).max(65535).optional().default(3000),
+
   /** Discord bot token */
   DISCORD_BOT_TOKEN: nonEmptyString,
+
+  /** A Discord server (guild) ID to use for development */
+  DEVELOPMENT_GUILD_ID: nonEmptyString.optional(),
 
   /** Railway provided variables */
   RAILWAY_PUBLIC_DOMAIN: nonEmptyString.optional(),
