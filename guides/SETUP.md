@@ -39,7 +39,7 @@ This guide will walk you through the steps to get your Discord bot up and runnin
 2. When prompted, add the token you generated in step `2.2`.
 3. Once your first deployment is complete, you should see your bot come online in the Discord server you invited it to! Try sending the `/ping` slash command to see if it responds with "Pong!".
 
-> By default, this template does not expose a REST API. If you want to make your bot interactive with an external web application or API, you can read the [REST_API](guides/2-REST_API.md) guide for instructions on how to enable the REST API functionality.
+> By default, this template does not expose a REST API. If you want to make your bot interactive with an external web application or API, you can read the [REST_API](guides/REST_API.md) guide for instructions on how to enable the REST API functionality.
 
 ## 5. Setup local development environment
 

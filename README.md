@@ -33,7 +33,7 @@ This template aims to provide a concise yet comprehensive starting point for bui
 This template is for you if:
 - You have some experience with TypeScript (or just JavaScript) and Node.js.
 - You want an opinionated file structure and architecture to build your bot on, instead of getting lost in a sea of files and folders that don't make sense.
-- You want to build a bot that can eventually be expanded to include a REST API and be interacted with outside of Discord. See the [REST_API](guides/2-REST_API.md) guide for more information.
+- You want to build a bot that can eventually be expanded to include a REST API and be interacted with outside of Discord. See the [REST_API](guides/REST_API.md) guide for more information.
 - You want a bot that scales well as your bot's complexity grows.
 - (Optional) You have some experience with NestJS. If you don't, that's okay! There are a lot of examples you can rely on to just copy/paste the same patterns over. NestJS makes patterns emerge naturally, so it's hard to sway too far from the recommended way of doing things.
 
