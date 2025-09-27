@@ -1,6 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { MessageFlags, PermissionFlagsBits } from "discord.js";
 import { Context, NumberOption, Options, SlashCommand, type SlashCommandContext } from "necord";
+import { InteractionError } from "src/common/errors/interaction-error";
 
 class PurgeOptions {
   @NumberOption({
@@ -26,10 +27,7 @@ export class PurgeCommand {
     const channel = interaction.channel;
 
     if (!channel || !channel.isTextBased() || !("bulkDelete" in channel)) {
-      return interaction.reply({
-        content: "❌ This command can only be used in text channels.",
-        flags: MessageFlags.Ephemeral,
-      });
+      throw new InteractionError("❌ This command can only be used in text channels.");
     }
 
     const deleted = await channel.bulkDelete(amount, true);

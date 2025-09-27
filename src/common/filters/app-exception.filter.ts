@@ -1,46 +1,47 @@
 import { ArgumentsHost, Catch, ExceptionFilter, HttpStatus, Injectable, Logger } from "@nestjs/common";
-import { DiscordAPIError, MessageFlags, type Interaction, BaseInteraction } from "discord.js";
-
-const humanizeDiscordError = (err: unknown): string => {
-  let message = "Something went wrong while executing this action.";
-
-  if (err instanceof DiscordAPIError) {
-    switch (err.code) {
-      case 50013: // Missing Permissions
-        message = "I don't have the required permissions to perform that action.";
-        break;
-      case 50001: // Missing Access
-        message = "I don't have access to that something.";
-        break;
-      case 10008: // Unknown Message (often deleted)
-        message = "That message no longer exists.";
-        break;
-    }
-  }
-
-  return message;
-};
-
-const safeInteractionReply = async (interaction: Interaction, content: string) => {
-  try {
-    if (interaction.isRepliable()) {
-      await interaction.reply({ content, flags: MessageFlags.Ephemeral });
-    }
-  } catch {
-    // Swallow reply errors – we don't want error loops
-  }
-};
+import { BaseInteraction, DiscordAPIError } from "discord.js";
+import { InteractionError } from "../errors/interaction-error";
 
 @Catch()
 @Injectable()
 export class AppExceptionFilter implements ExceptionFilter {
   private readonly logger = new Logger(AppExceptionFilter.name);
 
+  private shouldLog(exception: any, host: ArgumentsHost): boolean {
+    try {
+      const type = host.getType<string>();
+      let isInteraction = false;
+
+      if (type === "necord") {
+        const [context] = host.getArgs();
+        if (!context) return true;
+
+        const [interaction] = context;
+        if (interaction instanceof BaseInteraction) {
+          isInteraction = true;
+        }
+      }
+
+      if (exception instanceof InteractionError && !isInteraction) {
+        return true; // Log InteractionErrors outside of interaction contexts
+      }
+
+      if (exception instanceof DiscordAPIError) {
+        // Don't log common Discord API errors that are out of our control anyway
+        return !["50013", "50001", "10008"].includes(`${exception.code}`);
+      }
+    } catch {
+      // If anything goes wrong, log the error
+    }
+    return true;
+  }
+
   async catch(exception: any, host: ArgumentsHost) {
     const type = host.getType<string>();
 
-    // Log once, with as much useful info as possible
-    this.logger.error(exception?.stack || exception?.message || String(exception));
+    if (this.shouldLog(exception, host)) {
+      this.logger.error(exception?.stack || exception?.message || String(exception));
+    }
 
     // Handle Necord (Discord) execution contexts
     if (type === "necord") {
@@ -48,9 +49,8 @@ export class AppExceptionFilter implements ExceptionFilter {
       if (!context) return;
 
       const [interaction] = context;
-      if (interaction instanceof BaseInteraction && interaction.isRepliable()) {
-        const friendly = humanizeDiscordError(exception);
-        await safeInteractionReply(interaction, friendly);
+      if (interaction instanceof BaseInteraction) {
+        await InteractionError.reply(interaction, exception, this.logger);
       }
       return;
     }
@@ -65,7 +65,7 @@ export class AppExceptionFilter implements ExceptionFilter {
       const body =
         typeof exception?.getResponse === "function"
           ? exception.getResponse()
-          : { statusCode: status, message: humanizeDiscordError(exception) };
+          : { statusCode: status, message: exception?.message || String(exception) };
 
       return res.status(status).json(body);
     }
