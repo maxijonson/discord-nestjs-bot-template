@@ -29,11 +29,11 @@ export class WhatisCommand {
     const embed = new EmbedBuilder();
     if (thing instanceof GuildMember) {
       embed
-        .setTitle(`Member: ${thing.user.tag}`)
+        .setTitle(`Member: ${thing.user.displayName}`)
         .setThumbnail(thing.user.displayAvatarURL())
         .addFields(
           { name: "ID", value: thing.id, inline: true },
-          { name: "Nickname", value: thing.nickname ?? "None", inline: true },
+          { name: "Mention", value: `<@${thing.id}>`, inline: true },
           { name: "Joined At", value: thing.joinedAt?.toDateString() ?? "Unknown", inline: true },
           {
             name: "Roles",
@@ -45,6 +45,7 @@ export class WhatisCommand {
         .setTitle(`Role: ${thing.name}`)
         .addFields(
           { name: "ID", value: thing.id, inline: true },
+          { name: "Mention", value: `<@&${thing.id}>`, inline: true },
           { name: "Color", value: thing.hexColor, inline: true },
           { name: "Members", value: `${thing.members.size}`, inline: true },
           { name: "Mentionable", value: thing.mentionable ? "Yes" : "No", inline: true },
@@ -56,6 +57,7 @@ export class WhatisCommand {
         .setThumbnail(thing.displayAvatarURL())
         .addFields(
           { name: "ID", value: thing.id, inline: true },
+          { name: "Mention", value: `<@${thing.id}>`, inline: true },
           { name: "Bot", value: thing.bot ? "Yes" : "No", inline: true },
           { name: "Created At", value: thing.createdAt.toDateString(), inline: true },
         );

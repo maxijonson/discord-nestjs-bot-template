@@ -4,7 +4,7 @@ Here are some questions you may have when working with this template (or just Ne
 
 ## I'm getting an `UnknownDependenciesException`, but I'm pretty sure I correctly registered the injected provider. What gives?
 
-Make sure the `import` of your injected provider does not have a `type` keyword in front of it. 
+Make sure the `import` of your injected provider does not have a `type` keyword in front of it.
 This is a common mistake that can lead to this error.
 For example, you can reproduce this error by changing the following line in [`config-set.command.ts`](../src/commands/handlers/config/config-set.command.ts) from:
 
@@ -22,3 +22,7 @@ UnknownDependenciesException [Error]: Nest can't resolve dependencies of the Con
 Removing the `type` keyword will fix the issue.
 
 > Fun fact: I'm using this example because this is exactly what happened to me while writing the config command and it was driving me nuts for a while!
+
+## How do I mention a command/user/role/channel in an interaction response?
+
+See [Message Formatting](https://discord.com/developers/docs/reference#message-formatting)
