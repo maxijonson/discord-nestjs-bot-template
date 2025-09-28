@@ -1,3 +1,8 @@
+/**
+ * Displays information about an uploaded image file.
+ *
+ * This command demonstrates the use of the Attachment option type in a slash command.
+ */
 import { Injectable } from "@nestjs/common";
 import { EmbedBuilder, type Attachment } from "discord.js";
 import { AttachmentOption, Context, Options, SlashCommand, type SlashCommandContext } from "necord";

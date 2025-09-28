@@ -1,3 +1,8 @@
+/**
+ * Gets information about a user, role, or member in the server.
+ *
+ * This command demonstrates the use of non-primitive options in a slash command, specifically the Mentionable option type.
+ */
 import { Injectable } from "@nestjs/common";
 import { EmbedBuilder, GuildMember, Role, User } from "discord.js";
 import { Context, MentionableOption, Options, SlashCommand, type SlashCommandContext } from "necord";

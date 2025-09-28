@@ -1,3 +1,8 @@
+/**
+ * Echoes back the provided text, optionally in uppercase if 'loud' is true.
+ *
+ * This command demonstrates the use of primitive options in a slash command.
+ */
 import { Injectable } from "@nestjs/common";
 import { BooleanOption, Context, Options, SlashCommand, StringOption, type SlashCommandContext } from "necord";
 

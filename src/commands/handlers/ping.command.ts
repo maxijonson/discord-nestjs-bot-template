@@ -1,3 +1,8 @@
+/**
+ * Replies with "Pong!"
+ *
+ * This is a basic example of a slash command handler using the @SlashCommand decorator from the necord library.
+ */
 import { Injectable } from "@nestjs/common";
 import { Context, SlashCommand, type SlashCommandContext } from "necord";
 

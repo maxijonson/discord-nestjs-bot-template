@@ -1,3 +1,8 @@
+/**
+ * Deletes a specified number of messages from the current text channel.
+ *
+ * This command demonstrates how permissions and context restrictions can be applied to a slash command.
+ */
 import { Injectable } from "@nestjs/common";
 import { InteractionContextType, MessageFlags, PermissionFlagsBits } from "discord.js";
 import { Context, NumberOption, Options, SlashCommand, type SlashCommandContext } from "necord";
@@ -17,7 +22,7 @@ class PurgeOptions {
 
 @Injectable()
 export class PurgeCommand {
-  @RequiredBotPermission(PermissionFlagsBits.ManageMessages)
+  @RequiredBotPermission(PermissionFlagsBits.ManageMessages) // This will show an error to the calling user if the bot lacks this permission. If the user is an admin, the error will include the missing permissions.
   @SlashCommand({
     name: "purge",
     description: "Delete a number of messages from this channel",

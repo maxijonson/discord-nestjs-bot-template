@@ -104,3 +104,7 @@ Intents tell Discord what events your bot intends on handling, so that your bot 
 Set the correct intents for your bot in the [`src/bot/bot.module.ts`](../src/bot/bot.module.ts) file. By default, only those required for the example features to work properly were set. Your bot might need more or less intents depending on what you want to do. Note that some intents are considered "Privileged Intents" by Discord and require you to enable them in the Discord Developer Portal for your bot. Privileged intents require your bot to go through Discord's verification process if your bot is in more than 100 servers. If it's in less than 100 servers, you can enable them without verification.
 
 You can find a list of all the available intents in the [Discord.js documentation](https://discord-api-types.dev/api/discord-api-types-v10/enum/GatewayIntentBits) and on [Discord's official documentation](https://discord.com/developers/docs/events/gateway#list-of-intents).
+
+### 6.2 Explore the examples
+
+Each handler for a feature (command, event, etc.) was created with the intention of being a quick example of how to use one specific feature. I recommend that you glance over each of them to get a general idea of what you can do! The examples are purposely kept simple, short and not meant to be kept as-is in your bot.
