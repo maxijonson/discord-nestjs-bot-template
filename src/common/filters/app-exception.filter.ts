@@ -22,8 +22,8 @@ export class AppExceptionFilter implements ExceptionFilter {
         }
       }
 
-      if (exception instanceof InteractionError && !isInteraction) {
-        return true; // Log InteractionErrors outside of interaction contexts
+      if (exception instanceof InteractionError) {
+        return !isInteraction; // Log InteractionErrors outside of interaction contexts
       }
 
       if (exception instanceof DiscordAPIError) {

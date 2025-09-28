@@ -1,7 +1,7 @@
 import { Module } from "@nestjs/common";
 import { IntentsBitField } from "discord.js";
 import { NecordModule } from "necord";
-import { EnvService } from "src/common/env/env.service";
+import { EnvService } from "src/env/env.service";
 
 @Module({
   imports: [

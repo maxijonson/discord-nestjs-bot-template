@@ -3,7 +3,7 @@ import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import { BotModule } from "./bot/bot.module";
 import { CommandsModule } from "./commands/commands.module";
-import { EnvModule } from "./common/env/env.module";
+import { EnvModule } from "./env/env.module";
 import { EventsModule } from "./events/events.module";
 import { APP_FILTER } from "@nestjs/core";
 import { AppExceptionFilter } from "./common/filters/app-exception.filter";
