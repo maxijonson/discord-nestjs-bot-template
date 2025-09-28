@@ -30,7 +30,7 @@ export const ensureDir = (dir: string) => {
 export const escapeForStringLiteral = (s: string) => s.replace(/\\/g, "\\\\").replace(/"/g, '\\"');
 
 export const formatWithPrettier = async (files: string[]) => {
-  const config = await prettier.resolveConfig(ROOT);
+  const config = await prettier.resolveConfig(path.join(ROOT, ".prettierrc"));
   for (const file of files) {
     const source = await fs.promises.readFile(file, "utf8");
     const formatted = await prettier.format(source, {
