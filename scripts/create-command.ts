@@ -34,6 +34,15 @@ yargs(hideBin(process.argv))
     },
     // --- COMMAND HANDLER ---
     async ({ name, description }) => {
+      const folder = name.includes("/") ? path.join(...name.split("/").slice(0, -1)) : "";
+      name = name.includes("/") ? name.split("/").slice(-1)[0] : name;
+
+      // ---------- Paths ----------
+      const commandsRoot = path.join(ROOT, "src", "commands");
+      const cmdDir = path.join(commandsRoot, "handlers", folder);
+      const cmdFilePath = path.join(cmdDir, `${name}.command.ts`);
+      const commandsModulePath = path.join(commandsRoot, "commands.module.ts");
+
       name = toKebab(name);
       if (!/^[a-z][a-z0-9-]*$/.test(name)) {
         console.error("❌ Invalid name. Use letters, numbers, and dashes, starting with a letter.");
@@ -42,12 +51,6 @@ yargs(hideBin(process.argv))
 
       const className = toPascal(name) + "Command";
       const methodName = toCamel(name);
-
-      // ---------- Paths ----------
-      const commandsRoot = path.join(ROOT, "src", "commands");
-      const cmdDir = path.join(commandsRoot, "handlers");
-      const cmdFilePath = path.join(cmdDir, `${name}.command.ts`);
-      const commandsModulePath = path.join(commandsRoot, "commands.module.ts");
 
       // ---------- Scaffolding ----------
       ensureDir(cmdDir);
@@ -110,17 +113,17 @@ yargs(hideBin(process.argv))
 
       // 2) Wire into commands.module.ts -> add import + add to HANDLERS
       const commandsModule = project.addSourceFileAtPath(commandsModulePath);
+      const importPath = `./${path.relative(path.dirname(commandsModulePath), cmdFilePath)}`.slice(0, -3);
 
       const alreadyImported = !!commandsModule.getImportDeclarations().find((imp) => {
         return (
-          imp.getModuleSpecifierValue() === `./handlers/${name}.command` &&
-          imp.getNamedImports().some((ni) => ni.getName() === className)
+          imp.getModuleSpecifierValue() === importPath && imp.getNamedImports().some((ni) => ni.getName() === className)
         );
       });
 
       if (!alreadyImported) {
         commandsModule.addImportDeclaration({
-          moduleSpecifier: `./handlers/${name}.command`,
+          moduleSpecifier: importPath,
           namedImports: [className],
         });
       }

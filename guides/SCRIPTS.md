@@ -53,3 +53,5 @@ Creates a new command in the `src/commands/handlers/` folder and updates the `Co
 ```bash
 npm run create:command -- <command-name> [--description "Command description"]
 ```
+
+The `command-name` should use kebab-case (e.g., `my-command`). You can also create commands in subfolders of the `handlers` folder by using slashes in the name (e.g., `admin/kick-user`).
