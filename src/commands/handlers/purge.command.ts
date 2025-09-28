@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { MessageFlags, PermissionFlagsBits } from "discord.js";
+import { InteractionContextType, MessageFlags, PermissionFlagsBits } from "discord.js";
 import { Context, NumberOption, Options, SlashCommand, type SlashCommandContext } from "necord";
 import { InteractionError } from "src/common/errors/interaction-error";
 import { RequiredBotPermission } from "src/common/guards/require-bot-permission.guard";
@@ -24,6 +24,9 @@ export class PurgeCommand {
 
     // This will make the command invisible to users without the Manage Messages permission
     defaultMemberPermissions: PermissionFlagsBits.ManageMessages,
+
+    // Only allow this command in guilds
+    contexts: [InteractionContextType.Guild],
   })
   async handlePurge(@Context() [interaction]: SlashCommandContext, @Options() { amount }: PurgeOptions) {
     const channel = interaction.channel;
