@@ -48,8 +48,9 @@ This template comes with guides to help you get started and extend your bot with
 
 1. [Setup](guides/SETUP.md): This guide will walk you through the steps of getting your bot online, starting from nothing and ending with a production-ready bot hosted on Railway.
 2. [Project Structure](guides/PROJECT_STRUCTURE.md): Overview of the project's folder structure and organization.
-3. [REST API](guides/REST_API.md): Instructions on how to set up a REST API alongside your bot, allowing you to interact with it outside of Discord.
-4. [Scripts](guides/SCRIPTS.md): Explanation of the NPM scripts included in this template to help you automate tasks like creating new commands.
+3. [Utilities](guides/UTILITIES.md): Explanation of the various utility features provided by the template, including guards, interceptors, and filters that enhance the functionality and robustness of your Discord bot.
+4. [REST API](guides/REST_API.md): Instructions on how to set up a REST API alongside your bot, allowing you to interact with it outside of Discord.
+5. [Scripts](guides/SCRIPTS.md): Explanation of the NPM scripts included in this template to help you automate tasks like creating new commands.
 
 ## One-Click Deploy
 
