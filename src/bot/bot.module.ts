@@ -10,8 +10,9 @@ import { EnvService } from "src/env/env.service";
       useFactory: (envService: EnvService) => ({
         token: envService.get("DISCORD_BOT_TOKEN"),
         development:
-          envService.get("NEST_ENV") !== "production" && envService.get("DEVELOPMENT_GUILD_ID")
-            ? [envService.get("DEVELOPMENT_GUILD_ID")!]
+          envService.get("NEST_ENV") !== "production" &&
+          (envService.get("DISCORD_DEVELOPMENT_GUILD_ID")?.length ?? 0) > 0
+            ? envService.get("DISCORD_DEVELOPMENT_GUILD_ID")!
             : undefined,
         intents: [IntentsBitField.Flags.Guilds],
       }),

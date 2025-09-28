@@ -15,7 +15,10 @@ export const Env = z.object({
   DISCORD_BOT_TOKEN: nonEmptyString,
 
   /** A Discord server (guild) ID to use for development */
-  DEVELOPMENT_GUILD_ID: nonEmptyString.optional(),
+  DISCORD_DEVELOPMENT_GUILD_ID: nonEmptyString
+    .trim()
+    .transform((val) => val.split(",").map((id) => id.trim()))
+    .optional(),
 
   /** Railway provided variables */
   RAILWAY_PUBLIC_DOMAIN: nonEmptyString.optional(),

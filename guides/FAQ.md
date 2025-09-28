@@ -26,3 +26,10 @@ Removing the `type` keyword will fix the issue.
 ## How do I mention a command/user/role/channel in an interaction response?
 
 See [Message Formatting](https://discord.com/developers/docs/reference#message-formatting)
+
+## I edited a command file, but the changes are not reflected when I use the command in Discord. Why?
+
+First of all, try to reload Discord (Hit `Cmd+R` / `Ctrl+R` or close and reopen the app). The commands could be cached on your side only.
+
+If that doesn't work and you are writing a global command (`@SlashCommand` without `guilds` property), keep in mind that global commands can take up to an hour to propagate (See [Global Commands](https://necord.org/interactions/slash-commands#global-commands)).
+You can set the `DISCORD_DEVELOPMENT_GUILD_ID` environment variable with the server ID you are using for testing for instant propagation of your commands to that server (See [Dev Mode](https://necord.org/start#module-setup)).

@@ -8,6 +8,7 @@ import { ConfigCommand } from "./handlers/config/config.command";
 import { ConfigSetCommand } from "./handlers/config/config-set.command";
 import { ConfigDeleteCommand } from "./handlers/config/config-delete.command";
 import { ConfigClearCommand } from "./handlers/config/config-clear.command";
+import { SearchCommand } from "./handlers/search.command";
 
 // You can easily disable commands by removing them from this array.
 // This way, you can keep the code as reference but not have it active.
@@ -22,6 +23,7 @@ const HANDLERS: Provider[] = [
   ConfigSetCommand,
   ConfigDeleteCommand,
   ConfigClearCommand,
+  SearchCommand,
 ];
 
 @Module({
