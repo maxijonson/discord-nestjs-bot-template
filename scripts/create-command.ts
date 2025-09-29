@@ -43,14 +43,17 @@ yargs(hideBin(process.argv))
       const cmdFilePath = path.join(cmdDir, `${name}.command.ts`);
       const commandsModulePath = path.join(commandsRoot, "commands.module.ts");
 
-      name = toKebab(name);
-      if (!/^[a-z][a-z0-9-]*$/.test(name)) {
+      // ---------- `name` casing ----------
+      const kebabName = toKebab(name);
+      const pascalName = toPascal(name);
+      const _camelName = toCamel(name);
+
+      if (!/^[a-z][a-z0-9-]*$/.test(kebabName)) {
         console.error("❌ Invalid name. Use letters, numbers, and dashes, starting with a letter.");
         process.exit(1);
       }
 
-      const className = toPascal(name) + "Command";
-      const methodName = toCamel(name);
+      const className = pascalName + "Command";
 
       // ---------- Scaffolding ----------
       ensureDir(cmdDir);
@@ -85,17 +88,17 @@ yargs(hideBin(process.argv))
         decorators: [{ name: "Injectable", arguments: [] }],
         methods: [
           {
-            name: toCamel("handle", methodName),
+            name: toCamel("handle", pascalName),
             isAsync: true,
             decorators: [
               {
                 name: "SlashCommand",
                 arguments: [
                   Writers.object({
-                    name: `"${escapeForStringLiteral(name)}"`,
+                    name: `"${escapeForStringLiteral(kebabName)}"`,
                     description: description
                       ? `"${escapeForStringLiteral(description)}"`
-                      : `"Runs the '${name}' command"`,
+                      : `"Runs the '${kebabName}' command"`,
                   }),
                 ],
               },
@@ -106,7 +109,7 @@ yargs(hideBin(process.argv))
                 type: "SlashCommandContext",
               },
             ],
-            statements: [`await interaction.reply("Pong from ${name}!");`],
+            statements: [`await interaction.reply("Pong from ${kebabName}!");`],
           },
         ],
       });

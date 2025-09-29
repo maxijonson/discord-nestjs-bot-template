@@ -4,8 +4,9 @@
  * This command demonstrates the use of the Attachment option type in a slash command.
  */
 import { Injectable } from "@nestjs/common";
-import { EmbedBuilder, MessageFlags, type Attachment } from "discord.js";
+import { EmbedBuilder, type Attachment } from "discord.js";
 import { AttachmentOption, Context, Options, SlashCommand, type SlashCommandContext } from "necord";
+import { InteractionError } from "src/common/errors/interaction-error";
 
 class UploadOptions {
   @AttachmentOption({
@@ -24,7 +25,7 @@ export class UploadCommand {
   })
   async handleUpload(@Context() [interaction]: SlashCommandContext, @Options() { image }: UploadOptions) {
     if (!image.contentType?.startsWith("image/")) {
-      return interaction.reply({ content: "Please upload a valid image file.", flags: MessageFlags.Ephemeral });
+      throw new InteractionError("❌ Please upload a valid image file.");
     }
 
     const embed = new EmbedBuilder()

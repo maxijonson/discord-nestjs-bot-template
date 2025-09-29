@@ -11,15 +11,17 @@ export const toKebab = (...inputs: string[]) =>
     .replace(/[\s_]+/g, "-")
     .toLowerCase();
 
-export const toPascal = (...inputs: string[]) =>
-  inputs
-    .join(" ")
-    .split(/[-_ ]+/)
+export const toPascal = (...inputs: string[]) => {
+  const k = toKebab(...inputs);
+  return k
+    .split(/[-]+/)
     .map((s) => s.charAt(0).toUpperCase() + s.slice(1).toLowerCase())
     .join("");
+};
 
 export const toCamel = (...inputs: string[]) => {
-  const p = toPascal(...inputs);
+  const k = toKebab(...inputs);
+  const p = toPascal(k);
   return p.charAt(0).toLowerCase() + p.slice(1);
 };
 

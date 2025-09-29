@@ -1,0 +1,7 @@
+This file is only to ensure the handlers directory is tracked by git, you can delete it when you add your first handler. There are simply no component handlers that come with the template by default, but this module was added to demonstrate how/where you should organize your component handlers.
+
+Most of the time, your handlers will be scoped to one specific command, so I suggest you leave them in the command file they are being used in to avoid exporting code that isn't meant to be re-used everywhere.
+
+You should use this module if:
+- You have component handlers that are re-usable in multiple commands.
+- Your command handler file are getting too big to fit both the command and the component handlers.

@@ -4,8 +4,9 @@
  * This command demonstrates the use of autocomplete in slash commands.
  */
 import { Injectable, UseInterceptors } from "@nestjs/common";
-import { CommandInteraction, MessageFlags, type AutocompleteInteraction } from "discord.js";
+import { CommandInteraction, type AutocompleteInteraction } from "discord.js";
 import { AutocompleteInterceptor, Context, Options, SlashCommand, StringOption } from "necord";
+import { InteractionError } from "src/common/errors/interaction-error";
 
 // A mock dataset – you could replace this with an API or database call
 const DATABASE = {
@@ -99,15 +100,11 @@ export class SearchCommand {
     const results = DATABASE[category]?.filter((item) => item.toLowerCase().includes(term.toLowerCase())) || [];
 
     if (results.length === 0) {
-      return interaction.reply({
-        content: `❌ No results found for \`${term}\` in category \`${category}\`.`,
-        flags: MessageFlags.Ephemeral,
-      });
+      throw new InteractionError(`❌ No results found for \`${term}\` in category \`${category}\`.`);
     }
 
     return interaction.reply({
       content: `🔎 Results for \`${term}\` in category \`${category}\`: ${results.join(", ")}`,
-      flags: MessageFlags.Ephemeral,
     });
   }
 }

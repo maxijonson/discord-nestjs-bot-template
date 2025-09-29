@@ -7,9 +7,10 @@ import { EnvModule } from "./env/env.module";
 import { EventsModule } from "./events/events.module";
 import { APP_FILTER } from "@nestjs/core";
 import { AppExceptionFilter } from "./common/filters/app-exception.filter";
+import { ComponentsModule } from "./components/components.module";
 
 @Module({
-  imports: [EnvModule, BotModule, CommandsModule, EventsModule],
+  imports: [EnvModule, BotModule, CommandsModule, EventsModule, ComponentsModule],
   providers: [AppService, { provide: APP_FILTER, useClass: AppExceptionFilter }],
   controllers: [AppController],
 })

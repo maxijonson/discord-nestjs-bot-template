@@ -9,6 +9,12 @@ import { ConfigSetCommand } from "./handlers/config/config-set.command";
 import { ConfigDeleteCommand } from "./handlers/config/config-delete.command";
 import { ConfigClearCommand } from "./handlers/config/config-clear.command";
 import { SearchCommand } from "./handlers/search.command";
+import { SelectMemberCommand } from "./handlers/select/select-member.command";
+import { SelectStringCommand } from "./handlers/select/select-string.command";
+import { SelectRoleCommand } from "./handlers/select/select-role.command";
+import { SelectChannelCommand } from "./handlers/select/select-channel.command";
+import { SelectMentionableCommand } from "./handlers/select/select-mentionable.command";
+import { SelectDynamicCommand } from "./handlers/select/select-dynamic.command";
 
 // You can easily disable commands by removing them from this array.
 // This way, you can keep the code as reference but not have it active.
@@ -24,6 +30,12 @@ const HANDLERS: Provider[] = [
   ConfigDeleteCommand,
   ConfigClearCommand,
   SearchCommand,
+  SelectStringCommand,
+  SelectMemberCommand,
+  SelectRoleCommand,
+  SelectChannelCommand,
+  SelectMentionableCommand,
+  SelectDynamicCommand,
 ];
 
 @Module({
