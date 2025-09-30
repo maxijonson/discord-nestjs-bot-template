@@ -1,6 +1,6 @@
 /**
  * This example shows a more realistic use of a select menu: start by selecting an author, then a post by that author.
- * It uses https://jsonplaceholder.typicode.com/ as a fake API.
+ * Note the use of `deferReply`, `deferUpdate` and `editReply` to create complex interactions that span multiple steps.
  *
  * In order to prevent cluttering the project with this example's code, everything is in a single file.
  * However, in a real scenario, there are many things in here that should be moved to separate files.
@@ -24,16 +24,23 @@
  */
 import { Injectable } from "@nestjs/common";
 import axios, { isAxiosError } from "axios";
-import { Context, SelectedStrings, type SlashCommandContext, StringSelect, Subcommand } from "necord";
-import z from "zod";
-import { SelectCommandGroup } from "./select.command";
 import {
   ActionRowBuilder,
   EmbedBuilder,
   StringSelectMenuBuilder,
   type SelectMenuComponentOptionData,
 } from "discord.js";
+import {
+  Context,
+  SelectedStrings,
+  StringSelect,
+  Subcommand,
+  type SlashCommandContext,
+  type StringSelectContext,
+} from "necord";
 import { InteractionError } from "src/common/errors/interaction-error";
+import z from "zod";
+import { SelectCommandGroup } from "./select.command";
 
 @Injectable()
 @SelectCommandGroup()
@@ -54,6 +61,8 @@ export class SelectBlogCommand {
     description: "Search blog posts",
   })
   async handleSelectBlog(@Context() [interaction]: SlashCommandContext) {
+    await interaction.deferReply(); // Acknowledge the interaction and allow more time to fetch the authors
+
     const authors = await this.authorsService.findAll();
 
     const selectMenu = new StringSelectMenuBuilder()
@@ -67,19 +76,23 @@ export class SelectBlogCommand {
             description: `@${author.username} (${author.email})`,
           }),
         ),
-      )
-      .setMinValues(1)
-      .setMaxValues(1);
+      );
     const row = new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(selectMenu);
 
-    return interaction.reply({
+    return interaction.editReply({
       content: "Select an author to see their posts:",
       components: [row],
     });
   }
 
   @StringSelect(SelectBlogCommand.AUTHOR_SELECT_ID)
-  async handleSelectedAuthor(@Context() [interaction]: SlashCommandContext, @SelectedStrings() [authorId]: [string]) {
+  async handleSelectedAuthor(@Context() [interaction]: StringSelectContext, @SelectedStrings() [authorId]: [string]) {
+    // Acknowledges the interaction and keeps the context tied to the same message
+    await interaction.update({
+      content: "⏳ Loading author's posts...",
+      components: [],
+    });
+
     const author = await this.authorsService.findById(Number(authorId));
     if (!author) {
       throw new InteractionError("Author not found");
@@ -112,12 +125,11 @@ export class SelectBlogCommand {
             description: `By ${author.name} (${author.username})`,
           }),
         ),
-      )
-      .setMinValues(1)
-      .setMaxValues(1);
+      );
     const row = new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(selectMenu);
 
-    return interaction.reply({
+    // Edits the original reply instead of sending a new message
+    return interaction.editReply({
       content: "Select a post to view:",
       components: [row],
       embeds: [authorEmbed],
@@ -125,7 +137,12 @@ export class SelectBlogCommand {
   }
 
   @StringSelect(SelectBlogCommand.POST_SELECT_ID)
-  async handleSelectedPost(@Context() [interaction]: SlashCommandContext, @SelectedStrings() [postId]: [string]) {
+  async handleSelectedPost(@Context() [interaction]: StringSelectContext, @SelectedStrings() [postId]: [string]) {
+    await interaction.update({
+      content: "⏳ Loading post...",
+      components: [],
+    });
+
     const post = await this.postsService.findById(Number(postId));
     if (!post) {
       throw new InteractionError("Post not found");
@@ -141,9 +158,10 @@ export class SelectBlogCommand {
       .setDescription(`By ${author.name} (${author.username})\n\n${post.body}`)
       .setFooter({ text: `Post ID: ${post.id} | Author ID: ${post.userId}` });
 
-    return interaction.reply({
+    return interaction.editReply({
       content: "Here is the post you selected:",
       embeds: [postEmbed],
+      components: [], // Without this, the previous select menu would still be there, allowing to select another post (which could be a feature!)
     });
   }
 }

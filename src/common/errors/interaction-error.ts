@@ -46,6 +46,10 @@ export class InteractionError extends Error {
     const interactionError = InteractionError.fromError(err);
     if (interaction.isRepliable()) {
       try {
+        if (interaction.deferred || interaction.replied) {
+          await interaction.editReply({ content: interactionError.userMessage });
+          return;
+        }
         await interaction.reply({ content: interactionError.userMessage, flags: MessageFlags.Ephemeral });
       } catch (e) {
         logger.error("Failed to reply to interaction", e);
