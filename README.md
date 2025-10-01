@@ -41,6 +41,7 @@ This template is for you if:
 
 **✅ Zod**: Strongly typed schemas using [Zod 4](https://zod.dev/). This template is allergic to `any`! \
 **📦 Modular Structure**: Organized codebase with a clear separation of concerns, preventing spaghetti code and making it easier to maintain.
+**⚒️ Incredible Tooling**: Using DiscordJS on its own can be a pain, this template makes building multi-stage interactions a breeze. \
 
 ## Guides
 
