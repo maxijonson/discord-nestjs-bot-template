@@ -20,10 +20,13 @@ It's pretty common to want to send an error message back to the user when someth
 
 ```ts
 if (!userHasPermission) {
-  if (!interaction.isRepliable()) {
-    await interaction.reply("❌ You don't have permission to do that.");
+  if (interaction.isRepliable()) {
+    if (interaction.deferred || interaction.replied) {
+      await interaction.editReply({ content: "❌ You don't have permission to do that." });
+      return;
+    }
+    await interaction.reply({ content: "❌ You don't have permission to do that.", flags: MessageFlags.Ephemeral });
   }
-  return;
 }
 ```
 
@@ -43,10 +46,28 @@ It's pretty common for bots to do things that typically require special permissi
 
 Instead of always checking for permissions in your handler, you can use the `@RequiredBotPermission` decorator. This saves you from always making "pre-flight" checks and keeps your command handlers cleaner.
 
+You can also combine this guard with the `@RequiredMemberPermission` guard to ensure that both your bot and the user have the necessary permissions.
+
 ```ts
 @RequiredBotPermission(PermissionFlagsBits.ManageMessages)
 @SlashCommand(/* ... */)
 async handle(@Context() [interaction]: SlashCommandContext) {
   // You can rest assured that the bot has the required permissions here
+}
+```
+
+## `RequiredMemberPermission` Guard
+
+> Source: [src/common/guards/require-member-permission.guard.ts](../src/common/guards/require-member-permission.guard.ts)
+
+Exactly like the `RequiredBotPermission` guard, but for checking that the user invoking the interaction has the necessary permissions instead.
+
+You can also combine this guard with the `@RequiredBotPermission` guard to ensure that both your bot and the user have the necessary permissions.
+
+```ts
+@RequiredMemberPermission(PermissionFlagsBits.ManageMessages)
+@SlashCommand(/* ... */)
+async handle(@Context() [interaction]: SlashCommandContext) {
+  // You can rest assured that the user has the required permissions here
 }
 ```

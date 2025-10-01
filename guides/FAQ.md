@@ -33,3 +33,9 @@ First of all, try to reload Discord (Hit `Cmd+R` / `Ctrl+R` or close and reopen 
 
 If that doesn't work and you are writing a global command (`@SlashCommand` without `guilds` property), keep in mind that global commands can take up to an hour to propagate (See [Global Commands](https://necord.org/interactions/slash-commands#global-commands)).
 You can set the `DISCORD_DEVELOPMENT_GUILD_ID` environment variable with the server ID you are using for testing for instant propagation of your commands to that server (See [Dev Mode](https://necord.org/start#module-setup)).
+
+## I have components with different custom IDs, but the wrong component handler is being called. Why?
+
+This is likely due to the fact that you are using a colon (`:`) in your custom IDs. Discord.js (and by extension, Necord) uses colons for dynamic parameters in custom IDs. For example, two buttons, one with custom ID `vote:yes` and another with `vote:no`, would both match a handler decorated with `@Button("vote:response")`, where `response` would be either `yes` or `no` depending on which button was clicked. You can't have `@Button("vote:yes")` and `@Button("vote:no")` because both would match the first handler.
+
+Instead, use a different separator, such as a slash (`/`). For example, `vote/yes` and `vote/no` would work fine with `@Button("vote/yes")` and `@Button("vote/no")`.

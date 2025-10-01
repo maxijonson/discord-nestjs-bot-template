@@ -11,21 +11,21 @@ import { BaseInteraction, GuildChannel, PermissionFlagsBits, PermissionResolvabl
 import { NecordExecutionContext } from "necord";
 import { InteractionError } from "../errors/interaction-error";
 
-const REQUIRED_BOT_PERMISSIONS_KEY = "required_bot_permissions";
+const REQUIRED_MEMBER_PERMISSIONS_KEY = "required_member_permissions";
 
 /**
- * Guard that ensures the bot has the required permissions to execute a command.
+ * Guard that ensures the member has the required permissions to execute a command.
  * Use this over doing manual permission checks in each handler.
  */
 @Injectable()
-export class RequireBotPermissionGuard implements CanActivate {
+export class RequireMemberPermissionGuard implements CanActivate {
   constructor(private reflector: Reflector) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
-    const requiredPermissions = this.reflector.getAllAndOverride<PermissionResolvable[]>(REQUIRED_BOT_PERMISSIONS_KEY, [
-      context.getHandler(),
-      context.getClass(),
-    ]);
+    const requiredPermissions = this.reflector.getAllAndOverride<PermissionResolvable[]>(
+      REQUIRED_MEMBER_PERMISSIONS_KEY,
+      [context.getHandler(), context.getClass()],
+    );
     if (!requiredPermissions || requiredPermissions.length === 0) {
       return true;
     }
@@ -36,13 +36,10 @@ export class RequireBotPermissionGuard implements CanActivate {
     const channel = interaction.channel;
     if (!channel || !(channel instanceof GuildChannel)) return true;
 
-    const botMember = interaction.guild.members.me;
-    if (!botMember) return true;
-
-    const permissions = channel.permissionsFor(botMember);
+    const permissions = interaction.memberPermissions;
     if (!permissions || !permissions.has(requiredPermissions)) {
-      let message = "❌ I don't have the required permissions to do that.";
-      if (interaction.memberPermissions?.has(PermissionFlagsBits.ManageGuild)) {
+      let message = "❌ You don't have the required permissions to do that.";
+      if (permissions?.has(PermissionFlagsBits.ManageGuild)) {
         const missing = permissions
           ?.missing(requiredPermissions)
           .map((perm) => `\`${perm}\``)
@@ -58,5 +55,5 @@ export class RequireBotPermissionGuard implements CanActivate {
   }
 }
 
-export const RequiredBotPermission = (...permissions: PermissionResolvable[]) =>
-  applyDecorators(UseGuards(RequireBotPermissionGuard), SetMetadata(REQUIRED_BOT_PERMISSIONS_KEY, permissions));
+export const RequiredMemberPermission = (...permissions: PermissionResolvable[]) =>
+  applyDecorators(UseGuards(RequireMemberPermissionGuard), SetMetadata(REQUIRED_MEMBER_PERMISSIONS_KEY, permissions));
