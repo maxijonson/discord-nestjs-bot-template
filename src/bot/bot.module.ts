@@ -9,11 +9,12 @@ import { EnvService } from "src/env/env.service";
       inject: [EnvService],
       useFactory: (envService: EnvService) => ({
         token: envService.get("DISCORD_BOT_TOKEN"),
-        development:
-          envService.get("NEST_ENV") !== "production" &&
-          (envService.get("DISCORD_DEVELOPMENT_GUILD_ID")?.length ?? 0) > 0
-            ? envService.get("DISCORD_DEVELOPMENT_GUILD_ID")!
-            : undefined,
+        development: (() => {
+          if (envService.get("NEST_ENV") === "production") return undefined;
+          const guildIds = envService.get("DISCORD_DEVELOPMENT_GUILD_ID") || [];
+          if (guildIds.length > 0) return guildIds;
+          return undefined;
+        })(),
         intents: [IntentsBitField.Flags.Guilds],
       }),
     }),
