@@ -39,9 +39,10 @@ This template is for you if:
 
 ## Template Features
 
-**✅ Zod**: Strongly typed schemas using [Zod 4](https://zod.dev/). This template is allergic to `any`! \
-**📦 Modular Structure**: Organized codebase with a clear separation of concerns, preventing spaghetti code and making it easier to maintain.
+**📦 Modular Structure**: Organized codebase with a clear separation of concerns, preventing spaghetti code and making it easier to maintain. \
 **⚒️ Incredible Tooling**: Using DiscordJS on its own can be a pain, this template makes building multi-stage interactions a breeze. \
+**💪 DiscordJS on Steroids**: Necord is built **on top of** DiscordJS. This means you can still fallback to what you'd be doing without it at any time. \
+**💡 Learn by Example**: This template includes a variety of examples to help you understand how to use Necord effectively.
 
 ## Guides
 

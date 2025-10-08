@@ -18,6 +18,7 @@ import { SelectDynamicCommand } from "./handlers/select/select-dynamic.command";
 import { SelectBlogCommand } from "./handlers/select/select-blog.command";
 import { FeedbackCommand } from "./handlers/feedback.command";
 import { VoteCommand } from "./handlers/vote.command";
+import { PollCommand } from "./handlers/select/poll.command";
 
 // You can easily disable commands by removing them from this array.
 // This way, you can keep the code as reference but not have it active.
@@ -42,6 +43,7 @@ const HANDLERS: Provider[] = [
   SelectBlogCommand,
   FeedbackCommand,
   VoteCommand,
+  PollCommand,
 ];
 
 @Module({
