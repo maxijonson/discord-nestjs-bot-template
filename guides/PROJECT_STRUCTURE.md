@@ -9,13 +9,13 @@ This guide explains the project structure of the template and the reasoning behi
 The bot is organized into the following main folders (inside the `src` folder).
 
 - `commands`: Contains all slash commands of the bot. (`@SlashCommand`)
-- `events`: Contains all event listeners of the bot. (`@On`, `@Once`)
+- `listeners`: Contains all event listeners of the bot. (`@On`, `@Once`)
 
 Each folder is a module responsible to aggregate all of their respective handlers (in their `handlers` folder). This brings dependencies closer together, instead of importing everything into the root `app.module.ts` file.
 
 Each handler is in its own file, following the Single Responsibility Principle. This keeps files small and focused, making them easier to read and maintain. Their name contains the type of handler (e.g: `ping.command.ts`, `ready.event.ts`). This makes it easier to find specific handlers (in VS Code, for example, when using the `Go to File...` command).
 
-Handlers are then imported and provided in their respective module file (e.g: `commands.module.ts`, `events.module.ts`). You'll find a `HANDLERS` array in each module file, which is a list of all the handlers in that module. This makes it easy to see all the handlers in one place and to add new ones.
+Handlers are then imported and provided in their respective module file (e.g: `commands.module.ts`, `listeners.module.ts`). You'll find a `HANDLERS` array in each module file, which is a list of all the handlers in that module. This makes it easy to see all the handlers in one place and to add new ones.
 
 ## Environment variables
 

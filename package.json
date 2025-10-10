@@ -11,7 +11,8 @@
     "dev": "nest start --watch",
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "tsc --noEmit && eslint --max-warnings 0",
-    "create:command": "tsx scripts/create-command.ts"
+    "create:command": "tsx scripts/create-command.ts",
+    "create:listener": "tsx scripts/create-listener.ts"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",

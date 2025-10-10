@@ -3,15 +3,9 @@ import fs from "node:fs";
 import { Project, QuoteKind, SyntaxKind, Writers } from "ts-morph";
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
-import {
-  ROOT,
-  toKebab,
-  toPascal,
-  toCamel,
-  ensureDir,
-  escapeForStringLiteral,
-  formatWithPrettier,
-} from "./script-utils";
+import { ensureDir, escapeForStringLiteral, formatWithPrettier } from "./utils/script-utils";
+import { ROOT } from "./utils/scripts.constants";
+import { toCamel, toKebab, toPascal } from "src/common/utils/string.utils";
 
 yargs(hideBin(process.argv))
   .scriptName("create:command")
