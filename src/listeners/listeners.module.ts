@@ -1,7 +1,7 @@
 import { Module, type Provider } from "@nestjs/common";
-import { ReadyListener } from "./handlers/ready.listener";
+import { ClientReadyListener } from "./handlers/client-ready.listener";
 
-const HANDLERS: Provider[] = [ReadyListener];
+const HANDLERS: Provider[] = [ClientReadyListener];
 
 @Module({
   providers: [...HANDLERS],

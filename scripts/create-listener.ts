@@ -63,7 +63,6 @@ yargs(hideBin(process.argv))
         process.exit(1);
       }
       const [eventKey, eventValue] = eventEntry;
-      event = eventValue;
 
       const folder = name.includes("/") ? path.join(...name.split("/").slice(0, -1)) : "";
       name = name.includes("/") ? name.split("/").slice(-1)[0] : name;
@@ -118,14 +117,14 @@ yargs(hideBin(process.argv))
         namedImports: ["Context", { isTypeOnly: true, name: "ContextOf" }, "On"],
       });
 
-      const eventParamNames = getClientEventParams(event);
+      const eventParamNames = getClientEventParams(eventValue);
       sf.addClass({
         isExported: true,
         name: className,
         decorators: [{ name: "Injectable", arguments: [] }],
         methods: [
           {
-            name: toCamel("handle", pascalName),
+            name: toCamel("handle", eventKey),
             isAsync: true,
             decorators: [
               {
