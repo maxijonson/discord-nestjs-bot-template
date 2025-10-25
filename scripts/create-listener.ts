@@ -5,7 +5,7 @@ import { toCamel, toKebab, toPascal } from "src/common/utils/string.utils";
 import { Project, QuoteKind, SyntaxKind } from "ts-morph";
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
-import { ensureDir, escapeForStringLiteral, formatWithPrettier } from "./utils/script-utils";
+import { ensureDir, formatWithPrettier } from "./utils/script-utils";
 import { ROOT } from "./utils/scripts.constants";
 
 const getClientEventParams = (eventName: string): string[] => {
@@ -51,16 +51,19 @@ yargs(hideBin(process.argv))
     },
     // --- LISTENER HANDLER ---
     async ({ name, event }) => {
-      if (!Object.values(Events).includes(event as Events)) {
+      const eventEntry = Object.entries(Events).find(([key, value]) => value === event || key === event);
+      if (!eventEntry) {
         console.error(`❌ Invalid event name "${event}". Please provide a valid Discord.js event name.`);
         console.info("Valid events are:");
         console.info(
-          Object.values(Events)
-            .map((e) => ` - ${e}`)
+          Object.entries(Events)
+            .map((e) => ` - ${e[0]} (${e[1]})`)
             .join("\n"),
         );
         process.exit(1);
       }
+      const [eventKey, eventValue] = eventEntry;
+      event = eventValue;
 
       const folder = name.includes("/") ? path.join(...name.split("/").slice(0, -1)) : "";
       name = name.includes("/") ? name.split("/").slice(-1)[0] : name;
@@ -106,6 +109,11 @@ yargs(hideBin(process.argv))
       });
 
       sf.addImportDeclaration({
+        moduleSpecifier: "discord.js",
+        namedImports: ["Events"],
+      });
+
+      sf.addImportDeclaration({
         moduleSpecifier: "necord",
         namedImports: ["Context", { isTypeOnly: true, name: "ContextOf" }, "On"],
       });
@@ -122,16 +130,16 @@ yargs(hideBin(process.argv))
             decorators: [
               {
                 name: "On",
-                arguments: [`"${escapeForStringLiteral(event)}"`],
+                arguments: [`Events.${eventKey}`],
               },
             ],
             parameters: [
               {
                 name: `@Context() [${eventParamNames.join(", ")}]`,
-                type: `ContextOf<"${escapeForStringLiteral(event)}">`,
+                type: `ContextOf<Events.${eventKey}>`,
               },
             ],
-            statements: [`// TODO: Implement ${event} logic`],
+            statements: [`// TODO: Implement ${eventKey} logic`],
           },
         ],
       });
