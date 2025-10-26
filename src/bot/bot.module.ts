@@ -15,7 +15,11 @@ import { EnvService } from "src/env/env.service";
           if (guildIds.length > 0) return guildIds;
           return undefined;
         })(),
-        intents: [IntentsBitField.Flags.Guilds],
+        intents: [
+          IntentsBitField.Flags.Guilds,
+          /** This is a privileged gateway intent - Enable "Server Members Intent" in the Bot tab of your Discord Application */
+          IntentsBitField.Flags.GuildMembers,
+        ],
       }),
     }),
   ],

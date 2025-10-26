@@ -10,7 +10,7 @@ export class ClientReadyListener {
   constructor(private readonly schedulerRegistry: SchedulerRegistry) {}
 
   @Once(Events.ClientReady)
-  onClientReady(@Context() [client]: [Client]) {
+  async onClientReady(@Context() [client]: [Client]) {
     this.logger.log(`Logged in as ${client.user?.tag} on ${client.guilds.cache.size} guilds`);
     const statuses = [
       () => ({ name: `${client.guilds.cache.size} servers`, type: ActivityType.Watching }),

@@ -99,7 +99,7 @@ Now that you have your bot up and running, you can start customizing it to your 
 
 ### 6.1 Intents
 
-Intents tell Discord what events your bot intends on handling, so that your bot isn't overwhelmed with events it doesn't care about. For example, having the `GUILD_MEMBERS` intent enabled
+Intents tell Discord what events your bot intends on handling, so that your bot isn't overwhelmed with events it doesn't care about. For example, having the `GUILD_MEMBERS` intent enabled will allow your bot to receive events related to guild members, such as when a member joins or leaves a guild.
 
 Set the correct intents for your bot in the [`src/bot/bot.module.ts`](../src/bot/bot.module.ts) file. By default, only those required for the example features to work properly were set. Your bot might need more or less intents depending on what you want to do. Note that some intents are considered "Privileged Intents" by Discord and require you to enable them in the Discord Developer Portal for your bot. Privileged intents require your bot to go through Discord's verification process if your bot is in more than 100 servers. If it's in less than 100 servers, you can enable them without verification.
 
