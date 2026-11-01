@@ -12,6 +12,8 @@ async function bootstrap() {
 }
 bootstrap().catch((err) => {
   console.error("💥 Failed to bootstrap the application:", err);
+  // Non-zero so hosts like Railway mark the deploy as crashed instead of completed
+  process.exit(1);
 });
 
 // Prevent the bot from crashing when deep errors occur

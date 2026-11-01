@@ -13,6 +13,8 @@ This guide will walk you through the steps to get your Discord bot up and runnin
 
 1. On the left sidebar, click on "Bot". Alternatively, you can navigate to `https://discord.com/developers/applications/<YOUR_APPLICATION_ID>/bot`.
 2. Click on the "Reset Token" button to generate a bot token. Take note of this token, as you'll need it later.
+3. Scroll down to "Privileged Gateway Intents", enable "Server Members Intent" and click "Save Changes".
+   > This is required by the example `guildMemberAdd` listener. Without it, the bot will fail to log in with a "Used disallowed intents" error.
 
 ## 3. Invite your Bot to a Server
 
@@ -48,7 +50,7 @@ Now that your bot is online and production ready, you can setup your local devel
 
 > **Prerequisites**:
 >
-> - [Node.js](https://nodejs.org/en/download/) (v18 or higher)
+> - [Node.js](https://nodejs.org/en/download/) (v24 or higher)
 >   - **Recommended**: Use [Volta](https://volta.sh/) ([Windows](https://docs.volta.sh/guide/getting-started#windows-installation) / [Mac](https://docs.volta.sh/guide/getting-started#unix-installation) / [Linux](https://docs.volta.sh/guide/getting-started#unix-installation)) to manage your Node version, instead of installing it manually from the official website. Volta is supported out of the box in this template!
 > - [Git](https://git-scm.com/downloads) for version control.
 > - A code editor, such as [Visual Studio Code](https://code.visualstudio.com/).
